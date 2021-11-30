@@ -114,7 +114,9 @@ class DataPenjualanController extends Controller
     public function getAllData()
     {
         $data = DataPenjualan::all();
-
+        if (!$data) {
+            return $this->responError(0, "Data Penjualan Belum Ditambahkan");
+        }
         return response()->json([
             'status'    => 1,
             'message'   => "Berhasil Mendapatkan Semua Data Penjualan",
