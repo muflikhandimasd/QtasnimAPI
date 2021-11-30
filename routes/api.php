@@ -22,5 +22,6 @@ use App\Http\Controllers\DataPenjualanController;
 Route::post('/add-data', [DataPenjualanController::class, 'createData']);
 Route::put('/edit-data/{id}', [DataPenjualanController::class, 'editData']);
 Route::get('/get-data/{id}', [DataPenjualanController::class, 'getData']);
+Route::get('/get-all-data', [DataPenjualanController::class, 'getAllData']);
 Route::get('/search-data', [DataPenjualanController::class, 'searchData']);
 Route::delete('/delete-data/{id}', [DataPenjualanController::class, 'deleteData']);

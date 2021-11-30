@@ -111,87 +111,15 @@ class DataPenjualanController extends Controller
         ], Response::HTTP_OK);
     }
 
-    public function sortByNameData()
+    public function getAllData()
     {
-        $collection = collect([
-            ['id' => 1, 'name' => 'John', 'email' => 'john@gmail.com'],
-            ['id' => 2, 'name' => 'Sam', 'email' => 'sam@gmail.com'],
-            ['id' => 3, 'name' => 'Bilal', 'email' => 'bilal@gmail.com'],
-            ['id' => 4, 'name' => 'Lisa', 'email' => 'lisa@gmail.com'],
-            ['id' => 5, 'name' => 'Samuel', 'email' => 'samuel@gmail.com']
-        ]);
+        $data = DataPenjualan::all();
 
-        $filterd = $collection->sortBy('name');
-
-        $filterd->all();
-
-        print_r($filterd);
-    }
-
-    public function sortByTwoFields()
-    {
-        $collection = collect([
-            ['id' => 1, 'name' => 'John', 'email' => 'john@gmail.com'],
-            ['id' => 2, 'name' => 'Sam', 'email' => 'sam@gmail.com'],
-            ['id' => 3, 'name' => 'Bilal', 'email' => 'bilal@gmail.com'],
-            ['id' => 4, 'name' => 'Lisa', 'email' => 'lisa@gmail.com'],
-            ['id' => 5, 'name' => 'Samuel', 'email' => 'samuel@gmail.com']
-        ]);
-
-        $filterd = $collection->sortBy(function ($data, $key) {
-            return $data['name'] . $data['email'];
-        });
-
-        $filterd->all();
-
-        print_r($filterd);
-    }
-
-    public function sortByDate()
-    {
-        $collection = collect([
-            ['id' => 1, 'name' => 'John', 'created_date' => '2021-03-04'],
-            ['id' => 2, 'name' => 'Sam', 'created_date' => '2021-02-03'],
-            ['id' => 3, 'name' => 'Bilal', 'created_date' => '2020-01-02'],
-            ['id' => 4, 'name' => 'Lisa', 'created_date' => '202019-05-01'],
-            ['id' => 5, 'name' => 'Samuel', 'created_date' => '2018-08-03']
-        ]);
-
-        $filterd = $collection->sortBy(function ($data, $key) {
-            return $data['name'] . $data['email'];
-        });
-
-        $filterd->all();
-
-        print_r($filterd);
-    }
-
-    public function sortByCount()
-    {
-        $collection = collect([
-            ['id' => 1, 'name' => 'John', 'products' => ['shoes', 'belt', 'tshirt']],
-            ['id' => 2, 'name' => 'Anna', 'products' => ['socks', 'handbag']],
-            ['id' => 3, 'name' => 'Ricky', 'products' => ['jeans', 'sweater']],
-            ['id' => 4, 'name' => 'Sam', 'products' => ['sweater', 'jacket']]
-        ]);
-
-        $filterd = $collection->sortBy(function ($data, $key) {
-            return count($data['products']);
-        });
-
-        $filterd->all();
-
-        print_r($filterd);
-    }
-
-    public function sortByRelation()
-    {
-        $student = DataPenjualan::get()->sortBy(function ($query) {
-            return $query->subject->name;
-        })
-            ->all();
-
-        dd($student);
+        return response()->json([
+            'status'    => 1,
+            'message'   => "Berhasil Mendapatkan Semua Data Penjualan",
+            'result'    => $data
+        ], Response::HTTP_OK);
     }
 
     public function searchData(Request $request)
