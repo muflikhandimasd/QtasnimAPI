@@ -18,7 +18,7 @@ class CreateDataPenjualansTable extends Migration
             $table->string('nama_barang');
             $table->integer('stok')->unsigned();
             $table->integer('jumlah_terjual')->unsigned();
-            $table->enum('jenis_barang', ['Konsumsi', 'Pembersih']);
+            $table->string('jenis_barang');
             $table->date('tanggal_transaksi');
             $table->timestamps();
         });
