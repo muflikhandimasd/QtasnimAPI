@@ -40,11 +40,7 @@ class DataPenjualanController extends Controller
             'tanggal_transaksi'      => $request->tanggal_transaksi
         ]);
 
-        return response()->json([
-            'status'   => 1,
-            'pesan'    => "Data Penjualan $request->nama_barang Berhasil Dibuat",
-            'data'     => $data
-        ], Response::HTTP_OK);
+        return response()->json($data);
     }
 
     public function getData($id)
@@ -54,11 +50,7 @@ class DataPenjualanController extends Controller
             return $this->responError(0, "Data Penjualan Tidak Ditemukan");
         }
 
-        return response()->json([
-            'status'    => 1,
-            'message'   => "Berhasil Mendapatkan Data Penjualan",
-            'result'    => $data
-        ], Response::HTTP_OK);
+        return response()->json($data);
     }
 
     public function editData(Request $request, $id)
@@ -89,11 +81,7 @@ class DataPenjualanController extends Controller
             'tanggal_transaksi'      => $request->tanggal_transaksi
         ]);
 
-        return response()->json([
-            'status'   => 1,
-            'pesan'    => "Data Penjualan Berhasil diupdate!",
-            'data'     => $data
-        ], Response::HTTP_OK);
+        return response()->json($data);
     }
 
     public function deleteData($id)
@@ -105,10 +93,7 @@ class DataPenjualanController extends Controller
 
         $data->delete();
 
-        return response()->json([
-            'status'   => 1,
-            'pesan'    => "Data Penjualan $data->nama_barang berhasil dihapus",
-        ], Response::HTTP_OK);
+        return response()->json($data);
     }
 
     public function getAllData()
@@ -117,11 +102,7 @@ class DataPenjualanController extends Controller
         if (!$data) {
             return $this->responError(0, "Data Penjualan Belum Ditambahkan");
         }
-        return response()->json([
-            'status'    => 1,
-            'message'   => "Berhasil Mendapatkan Semua Data Penjualan",
-            'result'    => $data
-        ], Response::HTTP_OK);
+        return response()->json($data);
     }
 
     public function searchData(Request $request)
@@ -135,11 +116,7 @@ class DataPenjualanController extends Controller
 
         $data =  DataPenjualan::where('nama_barang', 'like', "%" . $keyword . "%")->orWhere('jenis_barang', 'like', "%" . $keyword . "%")->get();
 
-        return response()->json([
-            'status'     => 1,
-            'pesan'      => "Hasil Pencarian $keyword Berhasil Ditemukan",
-            'result'     => $data
-        ], Response::HTTP_OK);
+        return response()->json($data);
     }
 
     public function responError($sts, $pesan)
